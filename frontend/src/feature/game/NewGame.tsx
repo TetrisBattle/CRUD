@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from '@mui/material'
 import { FormTextField } from 'component/FormTextField'
 import { Formik, Form } from 'formik'
-import { gameValidation } from './GameValidation'
+import { gameValidation } from './gameValidation'
 
 export const NewGame = () => {
 	return (
