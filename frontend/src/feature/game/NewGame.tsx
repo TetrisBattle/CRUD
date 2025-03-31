@@ -1,14 +1,16 @@
 import { Box, Button, Typography } from '@mui/material'
 import { FormTextField } from 'component/FormTextField'
 import { Formik, Form } from 'formik'
-import { gameValidation } from './gameValidation'
+import { Game, gameValidation } from './gameValidation'
+import { postNewGame } from './GameGateway'
 
 export const NewGame = () => {
 	return (
 		<Formik
 			{...gameValidation}
-			onSubmit={(values) => {
-				console.log(values)
+			onSubmit={(game: Game) => {
+				postNewGame(game)
+				console.log(game)
 			}}
 		>
 			{() => (

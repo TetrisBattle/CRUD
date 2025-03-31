@@ -1,6 +1,11 @@
 import * as Yup from 'yup'
 
-const validationSchema = Yup.object({
+export type Game = {
+	name: string
+	description: string
+}
+
+const validationSchema: Yup.ObjectSchema<Game> = Yup.object({
 	name: Yup.string().required('Required'),
 	description: Yup.string().required('Required'),
 })
