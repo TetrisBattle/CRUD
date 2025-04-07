@@ -5,6 +5,8 @@ using Persistence;
 using Persistence.Seed;
 using Scalar.AspNetCore;
 using Application.Core;
+using Application.Games.Validators;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +28,7 @@ builder.Services.AddCors(opt => opt.AddPolicy("CorsPolicy", policy =>
 
 builder.Services.AddMediatR(typeof(GetGames.Handler));
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+builder.Services.AddValidatorsFromAssemblyContaining<CreateGameValidator>();
 
 var app = builder.Build();
 

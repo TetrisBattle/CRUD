@@ -1,4 +1,5 @@
 using API.Controllers;
+using Application.Core;
 using Application.Games;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -10,22 +11,23 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Game>>> GetGames()
         {
-            // return await context.Games.ToListAsync();
-            return await Mediator.Send(new GetGames.Query());
-            // return HandleResult(await Mediator.Send(new GetGames.Query()));
-
+            var games = await Mediator.Send(new GetGames.Query());
+            return Ok(games);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Game>> GetGame(string id)
         {
-            return await Mediator.Send(new GetGame.Query { Id = id });
+            var result = await Mediator.Send(new GetGame.Query { Id = id });
+            if (result.Value == null) return NotFound();
+            return Ok(result.Value);
         }
 
         [HttpPost]
         public async Task<ActionResult<string>> CreateGame(Game game)
         {
-            return await Mediator.Send(new CreateGame.Command { Game = game });
+            var gameId = await Mediator.Send(new CreateGame.Command { Game = game });
+            return CreatedAtAction(nameof(GetGame), new { id = gameId }, gameId);
         }
 
         [HttpPut]
@@ -38,8 +40,10 @@ namespace Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteGame(string id)
         {
-            await Mediator.Send(new DeleteGame.Command { Id = id });
-            return Ok();
+            // await Mediator.Send(new DeleteGame.Command { Id = id });
+            var result = await Mediator.Send(new DeleteGame.Command { Id = id });
+            if (result == null) return NotFound();
+            return NoContent();
         }
     }
 }
