@@ -1,8 +1,8 @@
 using Application.Games;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Persistence;
-using Persistence.Seed;
+using Data;
+using Data.Seed;
 using Scalar.AspNetCore;
 using Application.Core;
 using Application.Games.Validators;

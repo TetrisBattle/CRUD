@@ -1,6 +1,6 @@
 using Domain;
 
-namespace Persistence.Seed;
+namespace Data.Seed;
 
 public static class Seed
 {

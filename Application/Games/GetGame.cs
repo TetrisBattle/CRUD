@@ -1,7 +1,7 @@
 ﻿using Application.Core;
 using Domain;
 using MediatR;
-using Persistence;
+using Data;
 
 namespace Application.Games;
 

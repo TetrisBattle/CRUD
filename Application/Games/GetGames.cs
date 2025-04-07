@@ -1,7 +1,7 @@
 ﻿using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Persistence;
+using Data;
 
 namespace Application.Games;
 

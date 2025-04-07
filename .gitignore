@@ -484,7 +484,7 @@ $RECYCLE.BIN/
 *.swp
 
 /Api/appsettings.json
-/Persistence/Migrations
+/Data/Migrations
 /Api/sale.db
 /Api/sale.db-shm
 /Api/sale.db-wal
