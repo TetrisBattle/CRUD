@@ -1,5 +1,5 @@
 @Api_HostAddress = http://localhost:5000/api/Games
-@id = 21749C65-65AE-4C4B-B6EF-F5868CC718AB
+@id = 8312ec8c-c9db-4162-9b35-985615965c8f
 
 ### GET all games
 GET {{Api_HostAddress}}
@@ -14,7 +14,7 @@ POST {{Api_HostAddress}}
 Content-Type: application/json
 
 {
-  "name": "Dark SoulsDark SoulsDark SoulsDark Souls"
+  "name": "Dark SoulsDark"
 }
 
 ### PUT
@@ -22,6 +22,7 @@ PUT {{Api_HostAddress}}/{{id}}
 Content-Type: application/json
 
 {
+  "id": "{{id}}",
   "name": "Dark Souls Remastered"
 }
 
