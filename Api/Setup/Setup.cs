@@ -7,7 +7,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
-namespace Api;
+namespace Api.Setup;
 
 public static class Setup
 {
@@ -19,7 +19,7 @@ public static class Setup
 
 		builder.Services.AddDbContext<AppDbContext>(opt =>
 		{
-			opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+			opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 		});
 
 		builder.Services.AddCors(opt => opt.AddPolicy("CorsPolicy", policy =>
@@ -32,6 +32,7 @@ public static class Setup
 		builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 		builder.Services.AddValidatorsFromAssemblyContaining<GameValidator>();
 		builder.Services.AddScoped<GameService>();
+		builder.Services.AddHostedService<PingService>();
 	}
 
 	public static void SetupApp(WebApplication app)
