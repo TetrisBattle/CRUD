@@ -1,5 +1,5 @@
 @Api_HostAddress = http://localhost:5000/api/Games
-@id = 8312ec8c-c9db-4162-9b35-985615965c8f
+@id = e09843dd-7dd3-4de2-9152-3a4bb994e971
 
 ### GET all games
 GET {{Api_HostAddress}}

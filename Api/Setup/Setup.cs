@@ -32,7 +32,7 @@ public static class Setup
 		builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 		builder.Services.AddValidatorsFromAssemblyContaining<GameValidator>();
 		builder.Services.AddScoped<GameService>();
-		builder.Services.AddHostedService<PingService>();
+		// builder.Services.AddHostedService<PingService>();
 	}
 
 	public static void SetupApp(WebApplication app)
@@ -46,7 +46,7 @@ public static class Setup
 			app.MapOpenApi();
 			app.MapScalarApiReference(options =>
 			{
-				options.WithTitle("PartPicker");
+				options.WithTitle("CRUD");
 			});
 		}
 
