@@ -45,7 +45,7 @@ public static class Setup
 			app.MapOpenApi();
 			app.MapScalarApiReference(options =>
 			{
-				options.WithTitle("Sale");
+				options.WithTitle("PartPicker");
 			});
 		}
 
