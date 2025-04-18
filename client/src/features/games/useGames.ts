@@ -1,25 +1,27 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import agent from '../../lib/agent'
+import agent from 'lib/agent'
 import { useLocation } from 'react-router'
 import { Game, GameSchema } from 'features/games/gameValidation'
 
 export const useGames = (id?: string) => {
 	const queryClient = useQueryClient()
 	const location = useLocation()
+	const gameQueryKey = 'games'
+	const gameApiPath = '/games'
 
 	const { data: games, isPending: isLoadingGames } = useQuery({
-		queryKey: ['games'],
+		queryKey: [gameQueryKey],
 		queryFn: async () => {
-			const response = await agent.get<Game[]>('/games')
+			const response = await agent.get<Game[]>(gameApiPath)
 			return response.data
 		},
 		enabled: !id && location.pathname === '/games',
 	})
 
 	const { data: game, isPending: isLoadingGame } = useQuery({
-		queryKey: ['games', id],
+		queryKey: [gameQueryKey, id],
 		queryFn: async () => {
-			const response = await agent.get<Game>(`/games/${id}`)
+			const response = await agent.get<Game>(`${gameApiPath}/${id}`)
 			return response.data
 		},
 		enabled: !!id,
@@ -27,34 +29,34 @@ export const useGames = (id?: string) => {
 
 	const updateGame = useMutation({
 		mutationFn: async (game: Game) => {
-			await agent.put('/games', game)
+			await agent.put(gameApiPath, game)
 		},
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({
-				queryKey: ['games'],
+				queryKey: [gameQueryKey],
 			})
 		},
 	})
 
 	const createGame = useMutation({
 		mutationFn: async (game: GameSchema) => {
-			const response = await agent.post('/games', game)
+			const response = await agent.post(gameApiPath, game)
 			return response.data
 		},
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({
-				queryKey: ['games'],
+				queryKey: [gameQueryKey],
 			})
 		},
 	})
 
 	const deleteGame = useMutation({
 		mutationFn: async (id: string) => {
-			await agent.delete(`/games/${id}`)
+			await agent.delete(`${gameApiPath}/${id}`)
 		},
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({
-				queryKey: ['games'],
+				queryKey: [gameQueryKey],
 			})
 		},
 	})
